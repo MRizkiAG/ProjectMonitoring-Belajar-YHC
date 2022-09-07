@@ -1,4 +1,4 @@
-@extends('project.layout')
+@extends('project.app')
 
 @section('content')
     <div class="container">
@@ -69,7 +69,9 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Name</th>
+                                    <th>Leader</th>
                                     <th>Owner</th>
+                                    <th>Task</th>
                                     <th>Deadline</th>
                                     <th>Progress</th>
                                     <th>Action</th>
@@ -80,7 +82,9 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <th>{{ $project->name }}</th>
+                                        <th>{{ $project->leader->name }}</th>
                                         <th>{{ $project->owner }}</th>
+                                        <th>{{ $project->tasks_count }}</th>
                                         {{-- <th>{{ $project->deadline }}</th> --}}
                                         <th>{{ date('d-M-Y', strtotime($project->deadline)) }}</th>
                                         <th>{{ $project->progress }} %</th>

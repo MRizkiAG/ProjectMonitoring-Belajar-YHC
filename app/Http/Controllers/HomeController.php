@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $data = [
+            'title'=>'Home'
+        ];
+        $projects = Project::where('leader_id', auth()->user()->id)->withCount('tasks')->get();
+
+        // $projects = Project::with('leader')->withCount('tasks')->get();
+        // $projects = auth()->user()->projects;
+
+        return view('home', $data, compact('projects'));
     }
 }

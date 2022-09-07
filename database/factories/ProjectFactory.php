@@ -17,12 +17,12 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'leader_id' => fake()->numberBetween(0, 10),
+            'name' => fake()->sentence(3),
+            'leader_id' => fake()->numberBetween(1, 2),
             'owner' => fake()->name(),
             'deadline' => fake()->date(),
-            'progress' => fake()->numberBetween(0, 100),
-            'description' => fake()->text(100),
+            'progress' => fake()->numberBetween(70, 100),
+            'description' => fake()->paragraph(4),
         ];
     }
 }

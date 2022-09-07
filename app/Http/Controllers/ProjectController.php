@@ -15,10 +15,21 @@ class ProjectController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Project Monitoring'
+            'title' => 'Project Monitoring',
+            // 'projects' => Project::with('leader')->where('leader_id', auth()->user()->id)->withCount('tasks')->get()
+            'projects' => Project::with('leader')->withCount('tasks')->get()
+
         ];
-        $projects = Project::all();
-        return view('project.index', $data, compact('projects'));
+        // $projects = Project::all();
+
+        // $projects = Project::with('leader')->withCount('tasks')->get();
+
+
+        // $projects = auth()->user()->projects;
+        // return response()->json($projects);
+
+        // return view('project.index', $data, compact('projects'));
+        return view('project.index', $data);
     }
 
     /**
@@ -55,7 +66,7 @@ class ProjectController extends Controller
             'description' => 'nullable',
         ]);
         Project::create($data);
-        return redirect()->route('project.index')->with(['store-success'=>'Project berhasil ditambahkan!']);
+        return redirect()->route('project.index')->with(['store-success' => 'Project berhasil ditambahkan!']);
     }
 
     /**
@@ -70,7 +81,10 @@ class ProjectController extends Controller
             'title' => 'Detail Project'
         ];
         $project = Project::findOrFail($id);
-        return view('project.show', $data, compact('project'));
+        $tasks = $project->tasks;
+        // return response()->json($tasks);
+
+        return view('project.show', $data, compact('project', 'tasks'));
     }
 
     /**
@@ -112,7 +126,7 @@ class ProjectController extends Controller
         ]);
 
         $project->update($data);
-        return redirect()->route('project.index')->with(['update-success'=>'Project berhasil diupdate!']);
+        return redirect()->route('project.index')->with(['update-success' => 'Project berhasil diupdate!']);
     }
 
     /**
@@ -126,6 +140,6 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
 
-        return redirect()->route('project.index')->with(['destroy-success'=>'Project berhasil dihapus!']);
+        return redirect()->route('project.index')->with(['destroy-success' => 'Project berhasil dihapus!']);
     }
 }

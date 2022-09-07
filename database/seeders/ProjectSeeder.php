@@ -26,6 +26,6 @@ class ProjectSeeder extends Seeder
 
         // Project::create($data);
 
-        \App\Models\Project::factory(10)->create();
+        \App\Models\Project::factory(20)->create();
     }
 }
