@@ -9,7 +9,7 @@
                         <div class="d-flex justify-content-between">
                             <h1 class="p-2 py-3">{{ $title }}</h1>
                             <div>
-                                <a href="{{ route('project.index') }}" class="btn btn-warning my-3"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+                                <a href="{{ route('project.index') }}" class="btn btn-dark my-3"><i class="bi bi-arrow-left"></i> Kembali</a>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                 <textarea type="text" name="description" id="description" class="form-control"
                                     placeholder="Masukkan deskripsi project" aria-describedby="helpId">{{ @$project->description ?? old('description') }}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Simpan</button>
+                            <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Simpan</button>
                         </form>
                     </div>
                 </div>

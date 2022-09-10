@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <h1 class="p-2 py-3">{{ $title }}</h1>
                             <div>
-                                <a href="{{ route('project.create') }}" class="btn btn-primary my-3">
+                                <a href="{{ route('project.create') }}" class="btn btn-success my-3">
                                     <div class="d-flex align-items-center">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -62,8 +62,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     @endif
-
                     <div class="card-body">
+
                         <table class="table table-borderless table-responsive">
                             <thead>
                                 <tr>
@@ -81,36 +81,43 @@
                                 @foreach ($projects as $project)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <th>{{ $project->name }}</th>
-                                        <th>{{ $project->leader->name }}</th>
-                                        <th>{{ $project->owner }}</th>
-                                        <th>{{ $project->tasks_count }}</th>
-                                        {{-- <th>{{ $project->deadline }}</th> --}}
-                                        <th>{{ date('d-M-Y', strtotime($project->deadline)) }}</th>
-                                        <th>{{ $project->progress }} %</th>
-                                        <th class="d-flex ">
+                                        <td>{{ $project->name }}</td>
+                                        <td>{{ $project->leader->name }}</td>
+                                        <td>{{ $project->owner }}</td>
+                                        <td>{{ $project->tasks_count }}</td>
+                                        {{-- <td>{{ $project->deadline }}</td> --}}
+                                        <td>{{ date('d-M-Y', strtotime($project->deadline)) }}</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-info" role="progressbar" aria-label="Example with label"
+                                                    style="width: {{ $project->progress }}%;"
+                                                    aria-valuenow="{{ $project->progress }}" aria-valuemin="0"
+                                                    aria-valuemax="100">{{ $project->progress }}%</div>
+                                            </div>
+                                        </td>
+                                        <td class="d-flex ">
                                             {{-- Tombol Show --}}
                                             <a href="{{ route('project.show', $project) }}"
-                                                class="btn btn-labeled btn-success">
+                                                class="btn btn-labeled btn-primary btn-sm">
                                                 <span class="btn-label">
-                                                    <i class="fa fa-eye"></i>
+                                                    <i class="bi bi-eye"></i>
                                                 </span>
                                             </a>
 
                                             {{-- Tombol Edit --}}
                                             <a href="{{ route('project.edit', $project) }}"
-                                                class="btn btn-labeled btn-warning mx-1">
+                                                class="btn btn-labeled btn-warning mx-1 btn-sm">
                                                 <span class="btn-label">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <i class="bi bi-pencil-square"></i>
                                                 </span>
                                             </a>
 
                                             {{-- Tombol Delete --}}
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal">
                                                 <span class="btn-label">
-                                                    <i class="fa fa-trash"></i>
+                                                    <i class="bi bi-trash"></i>
                                                 </span>
                                             </button>
 
@@ -128,7 +135,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
+                                                                data-bs-dismiss="modal">Batal</button>
                                                             <form action="{{ route('project.destroy', $project) }}"
                                                                 method="post">
                                                                 @csrf
@@ -142,7 +149,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </th>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
