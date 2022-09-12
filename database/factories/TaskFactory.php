@@ -18,7 +18,7 @@ class TaskFactory extends Factory
     {
         return [
             'name' => fake()->sentence(2),
-            'project_id' => fake()->numberBetween(1, 2),
+            'project_id' => 2,
             'description' => fake()->paragraph(nbSentences:4),
             'status' => 'PENDING',
         ];

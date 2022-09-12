@@ -6,7 +6,14 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="text-uppercase p-4">{{ auth()->user()->name }}'s Project</h3>
+                        <div class="pagetitle mt-3 ms-3">
+                            <h1>{{ $title }}</h1>
+                            <nav>
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item active">Dashboard</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -28,18 +35,15 @@
                                         <td>{{ $project->tasks_count }}</td>
                                         <td>
                                             <div class="progress">
-                                                <div class="progress-bar bg-info" role="progressbar" aria-label="Example with label"
-                                                    style="width: {{ $project->progress }}%;" aria-valuenow="{{ $project->progress }}" aria-valuemin="0"
+                                                <div class="progress-bar bg-info" role="progressbar"
+                                                    aria-label="Example with label"
+                                                    style="width: {{ $project->progress }}%;"
+                                                    aria-valuenow="{{ $project->progress }}" aria-valuemin="0"
                                                     aria-valuemax="100">{{ $project->progress }}%</div>
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="{{ route('project.show', $project) }}"
-                                                class="btn btn-labeled btn-primary btn-sm">
-                                                <span class="btn-label">
-                                                    <i class="bi bi-eye"></i>
-                                                </span>
-                                            </a>
+                                            <x-sm_button route="{{ route('project.show', $project) }}" color="primary" icon="eye"/>
                                         </td>
                                     </tr>
                                 @endforeach

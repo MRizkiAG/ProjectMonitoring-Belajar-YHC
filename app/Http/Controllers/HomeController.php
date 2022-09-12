@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'title'=>'Home'
+            'title'=>'Dashboard'
         ];
         $projects = Project::where('leader_id', auth()->user()->id)->withCount('tasks')->get();
 

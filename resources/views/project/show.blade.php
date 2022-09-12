@@ -6,8 +6,16 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <div class="d-flex justify-content-between">
-                            <h1 class="p-2 py-3">{{ $title }}</h1>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="pagetitle  mt-3 ms-3">
+                                <h1>{{ $title }}</h1>
+                                <nav>
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="{{ url('/project') }}">Project</a></li>
+                                        <li class="breadcrumb-item active">Detail</li>
+                                    </ol>
+                                </nav>
+                            </div>
                             <div>
                                 <a href="{{ url()->previous() }}" class="btn btn-dark my-3"><i class="bi bi-arrow-left"></i>
                                     Kembali</a>
@@ -47,8 +55,11 @@
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $task->name }}</td>
                                         <td>{{ $task->description }}</td>
-                                        <td><span class="badge text-bg-warning fst-italic">{{ $task->status }}</span>
-                                            </td>
+                                        <td>
+                                            <span class="badge text-bg-{{ $task->getStatusColor }} fst-italic">
+                                                {{ $task->status }}
+                                            </span>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

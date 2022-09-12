@@ -17,4 +17,16 @@ class Project extends Model
     public function tasks(){
         return $this->hasMany(Task::class);
     }
+
+    public function getGetProgressColorAttribute(){
+        if ($this->progress >=80){
+            $prog = 'primary';
+        } elseif ($this->progress >= 50){
+            $prog = 'warning';
+        } else {
+            $prog = 'danger';
+        }
+
+        return $prog;
+    }
 }

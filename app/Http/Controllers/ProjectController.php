@@ -66,7 +66,10 @@ class ProjectController extends Controller
             'description' => 'nullable',
         ]);
         Project::create($data);
-        return redirect()->route('project.index')->with(['store-success' => 'Project berhasil ditambahkan!']);
+        return redirect()->route('project.index')->with([
+            'message' => 'Project berhasil ditambahkan!',
+            'icon' => 'check-circle-fill'
+        ]);
     }
 
     /**
@@ -126,7 +129,10 @@ class ProjectController extends Controller
         ]);
 
         $project->update($data);
-        return redirect()->route('project.index')->with(['update-success' => 'Project berhasil diupdate!']);
+        return redirect()->route('project.index')->with([
+            'message' => 'Project berhasil diupdate!',
+            'icon' => 'pencil-square'
+        ]);
     }
 
     /**
@@ -140,6 +146,9 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
 
-        return redirect()->route('project.index')->with(['destroy-success' => 'Project berhasil dihapus!']);
+        return redirect()->route('project.index')->with([
+            'message' => 'Project berhasil dihapus!',
+            'icon' => 'trash'
+        ]);
     }
 }
