@@ -25,7 +25,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('about');
 // });
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function(){
+    return redirect()->route('home');
+});
 Route::get('about', [AboutController::class, 'index']);
 
 Auth::routes();
@@ -34,6 +36,5 @@ Route::middleware('auth')->group(
     function () {
         Route::get('home', [HomeController::class, 'index'])->name('home');
         Route::resource('project', ProjectController::class);
-        // Route::get('/home', [HomeController::class, 'index'])->name('home');
     }
 );

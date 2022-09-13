@@ -4,17 +4,18 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">
+                <div class="pagetitle">
+                    <h1>{{ $title }}</h1>
+                    <nav>
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item active">Project</li>
+                        </ol>
+                    </nav>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
-                            <div class="pagetitle mt-3 ms-3">
-                                <h1>{{ $title }}</h1>
-                                <nav>
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item active">Project</li>
-                                    </ol>
-                                </nav>
-                            </div>
+                            <h2>Project Data</h2>
                             <div>
                                 <a href="{{ route('project.create') }}" class="btn btn-success my-3">
                                     <div class="d-flex align-items-center">

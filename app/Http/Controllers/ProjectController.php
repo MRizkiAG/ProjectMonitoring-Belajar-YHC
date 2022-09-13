@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -17,13 +18,13 @@ class ProjectController extends Controller
         $data = [
             'title' => 'Project Monitoring',
             // 'projects' => Project::with('leader')->where('leader_id', auth()->user()->id)->withCount('tasks')->get()
+            // 'projects' => Project::where('leader_id', auth()->user()->id)->withCount('tasks')->get()
             'projects' => Project::with('leader')->withCount('tasks')->get()
 
         ];
         // $projects = Project::all();
 
         // $projects = Project::with('leader')->withCount('tasks')->get();
-
 
         // $projects = auth()->user()->projects;
         // return response()->json($projects);

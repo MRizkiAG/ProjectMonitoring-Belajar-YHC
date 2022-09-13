@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,13 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         $data = [
-            'title'=>'Dashboard'
+            'title' => 'Dashboard'
         ];
         $projects = Project::where('leader_id', auth()->user()->id)->withCount('tasks')->get();
+        $projects_count = Project::where('leader_id', auth()->user()->id)->count();
 
-        // $projects = Project::with('leader')->withCount('tasks')->get();
-        // $projects = auth()->user()->projects;
-
-        return view('home', $data, compact('projects'));
+        return view('home', $data, compact('projects', 'projects_count'));
     }
 }

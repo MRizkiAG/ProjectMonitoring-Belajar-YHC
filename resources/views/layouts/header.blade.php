@@ -168,11 +168,13 @@
 
             </li>
             <!-- End Messages Nav --> --}}
+            @guest
+            @else
+
 
             <li class="nav-item dropdown pe-3">
 
-                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
-                    data-bs-toggle="dropdown">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{ url('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
                 </a><!-- End Profile Iamge Icon -->
@@ -205,7 +207,9 @@
                     </li>
 
                 </ul><!-- End Profile Dropdown Items -->
+
             </li><!-- End Profile Nav -->
+            @endguest
 
         </ul>
     </nav><!-- End Icons Navigation -->

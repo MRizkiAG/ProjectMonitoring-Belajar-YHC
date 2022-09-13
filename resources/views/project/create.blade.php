@@ -4,30 +4,30 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="pagetitle mt-3 ms-3">
-                                <h1>{{ $title }}</h1>
-                                <nav>
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="{{ url('/project') }}">Project</a></li>
-                                        <li class="breadcrumb-item active">
-                                            @if (@$project)
-                                                {{ 'Edit' }}
-                                            @else
-                                                {{ 'Tambah' }}
-                                            @endif
-                                        </li>
-                                    </ol>
-                                </nav>
-                            </div>
-                            <div>
-                                <a href="{{ route('project.index') }}" class="btn btn-dark my-3"><i
-                                        class="bi bi-arrow-left"></i> Kembali</a>
-                            </div>
-                        </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="pagetitle">
+                        <h1>{{ $title }}</h1>
+                        <nav>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="{{ url('/project') }}">Project</a></li>
+                                <li class="breadcrumb-item active">
+                                    @if (@$project)
+                                        {{ 'Edit' }}
+                                    @else
+                                        {{ 'Tambah' }}
+                                    @endif
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
+                    <div>
+                        <a href="{{ route('project.index') }}" class="btn btn-dark my-3"><i
+                                class="bi bi-arrow-left"></i> Kembali</a>
+                    </div>
+                </div>
+                <div class="card">
+                    {{-- <div class="card-header">
+                    </div> --}}
                     <div class="card-body">
                         <form action="{{ $url }}" method="post">
                             @csrf
