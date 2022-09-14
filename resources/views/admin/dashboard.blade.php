@@ -8,7 +8,7 @@
                     <h1>{{ $title }}</h1>
                     <nav>
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Admin Dashboard</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,8 +26,8 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>{{ $projects_count }}</h6>
-                                        <span class="text-success small pt-1 fw-bold">{{ $tasks_count }}</span>
-                                        <span class="text-muted small pt-2 ps-1">Task</span>
+                                        {{-- <span class="text-success small pt-1 fw-bold">12%</span>
+                                        <span class="text-muted small pt-2 ps-1">Task</span> --}}
 
                                     </div>
                                 </div>

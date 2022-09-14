@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -15,12 +18,17 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->hasRole('superadmin')){
+            $project = Project::with('leader')->withCount('tasks')->get();
+        } else {
+            $project = Project::where('leader_id', auth()->user()->id)->withCount('tasks')->get();
+        }
         $data = [
             'title' => 'Project Monitoring',
             // 'projects' => Project::with('leader')->where('leader_id', auth()->user()->id)->withCount('tasks')->get()
             // 'projects' => Project::where('leader_id', auth()->user()->id)->withCount('tasks')->get()
-            'projects' => Project::with('leader')->withCount('tasks')->get()
-
+            // 'projects' => Project::with('leader')->withCount('tasks')->get()
+            'projects' => $project
         ];
         // $projects = Project::all();
 
@@ -55,18 +63,18 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
         // dd($request->all());
-        $data = $request->validate([
-            'name' => 'required|string',
-            'leader_id' => 'required|integer',
-            'owner' => 'required|string',
-            'deadline' => 'required|date',
-            'progress' => 'required|integer',
-            'description' => 'nullable',
-        ]);
-        Project::create($data);
+        // $data = $request->validate([
+        //     'name' => 'required|string',
+        //     'leader_id' => 'required|integer',
+        //     'owner' => 'required|string',
+        //     'deadline' => 'required|date',
+        //     'progress' => 'required|integer',
+        //     'description' => 'nullable',
+        // ]);
+        Project::create($request->all());
         return redirect()->route('project.index')->with([
             'message' => 'Project berhasil ditambahkan!',
             'icon' => 'check-circle-fill'

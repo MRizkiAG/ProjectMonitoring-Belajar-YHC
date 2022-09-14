@@ -21,8 +21,8 @@
                         </nav>
                     </div>
                     <div>
-                        <a href="{{ route('project.index') }}" class="btn btn-dark my-3"><i
-                                class="bi bi-arrow-left"></i> Kembali</a>
+                        <a href="{{ route('project.index') }}" class="btn btn-dark my-3"><i class="bi bi-arrow-left"></i>
+                            Kembali</a>
                     </div>
                 </div>
                 <div class="card">
@@ -36,9 +36,15 @@
                             @endif
                             <div class="form-group my-3">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" id="name" class="form-control"
+                                <input type="text" name="name" id="name"
+                                    class="form-control @error('name') is-invalid @enderror"
                                     placeholder="Masukkan nama project" aria-describedby="helpId"
                                     value="{{ @$project->name ?? old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group my-3">
                                 <label for="leader_id">Leader ID</label>
