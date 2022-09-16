@@ -74,11 +74,10 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         $data = [
             'title' => 'Edit Task',
-            'project_id' => $request->project_id
         ];
         $task = Task::findOrFail($id);
         $url = route('task.update', $task);
@@ -98,8 +97,7 @@ class TaskController extends Controller
         // dd($request->all());
         $task = Task::findOrFail($id);
         $task->update($request->all());
-        $project = Project::findOrFail($request->project_id);
-        return redirect()->route('project.show', $project->id)->with([
+        return redirect()->route('project.show', $task->project_id)->with([
             'message' => 'Task berhasil diupdate!',
             'icon' => 'pencil-square'
         ]);
@@ -111,13 +109,12 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         $task = Task::findOrFail($id);
         $task->delete();
-        $project = Project::findOrFail($request->project_id);
 
-        return redirect()->route('project.show', $project->id)->with([
+        return redirect()->route('project.show', $task->project_id)->with([
             'message' => 'Task berhasil dihapus!',
             'icon' => 'trash'
         ]);

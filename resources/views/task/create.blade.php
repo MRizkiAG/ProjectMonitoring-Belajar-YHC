@@ -34,7 +34,7 @@
                             @if (@$task)
                                 @method('PUT')
                             @endif
-                            <input type="hidden" name="project_id" value="{{ $project_id }}">
+                            <input type="hidden" name="project_id" value="{{ $project_id ?? @$task->project_id }}">
                             <div class="form-group my-3">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name"

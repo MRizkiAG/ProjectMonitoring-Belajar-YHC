@@ -81,8 +81,8 @@
                                         <td class="d-flex ">
                                             {{-- Tombol Edit --}}
                                             <x-sm_button
-                                                {{-- route="{{ route('task.edit', $task, ['project_id' => $project->id]) }}" --}}
-                                                route="{{url('task/'.$task->id.'/edit?project_id='. $project->id)}}"
+                                                route="{{ route('task.edit', $task) }}"
+                                                {{-- route="{{url('task/'.$task->id.'/edit?project_id='. $project->id)}}" --}}
                                                 color="warning mx-1" icon="pencil-square" />
                                             @role('superadmin|admin')
                                                 {{-- Tombol Delete --}}
@@ -111,7 +111,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Batal</button>
-                                                                <form action="{{ url('task/'. $task->id. '?project_id='. $project->id) }}"
+                                                                <form action="{{ route('task.destroy', $task->id) }}"
                                                                     method="post">
                                                                     @csrf
                                                                     @method('DELETE')
