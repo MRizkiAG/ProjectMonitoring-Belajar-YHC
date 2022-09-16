@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -15,7 +18,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        return redirect()->route('project.index');
     }
 
     /**
@@ -23,9 +26,17 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $data = [
+            'title' => 'Tambah Task',
+            'project_id' => $request->project_id
+        ];
+
+        $url = route('task.store');
+
+
+        return view('task.create', $data, compact('url'));
     }
 
     /**
@@ -36,7 +47,14 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        Task::create($request->all());
+        $project = Project::findOrFail($request->project_id);
+
+        return redirect()->route('project.show', $project->id)->with([
+            'message' => 'Task berhasil ditambahkan!',
+            'icon' => 'check-circle-fill'
+        ]);
+        // return response()->json($request);
     }
 
     /**
@@ -56,9 +74,16 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(Request $request, $id)
     {
-        //
+        $data = [
+            'title' => 'Edit Task',
+            'project_id' => $request->project_id
+        ];
+        $task = Task::findOrFail($id);
+        $url = route('task.update', $task);
+
+        return view('task.create', $data, compact('task', 'url'));
     }
 
     /**
@@ -68,9 +93,16 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, $id)
     {
-        //
+        // dd($request->all());
+        $task = Task::findOrFail($id);
+        $task->update($request->all());
+        $project = Project::findOrFail($request->project_id);
+        return redirect()->route('project.show', $project->id)->with([
+            'message' => 'Task berhasil diupdate!',
+            'icon' => 'pencil-square'
+        ]);
     }
 
     /**
@@ -79,8 +111,15 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+        $task->delete();
+        $project = Project::findOrFail($request->project_id);
+
+        return redirect()->route('project.show', $project->id)->with([
+            'message' => 'Task berhasil dihapus!',
+            'icon' => 'trash'
+        ]);
     }
 }

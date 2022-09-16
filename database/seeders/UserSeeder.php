@@ -27,16 +27,22 @@ class UserSeeder extends Seeder
 
         // $user = User::create($data);
         // $user->assignRole('superadmin');
-        for ($i = 0; $i < 10; $i++) {
 
-            $data = [
-                'name' => $faker->name(),
-                'email' => $faker->email(),
-                'password' => Hash::make('12345678'),
-            ];
+        // for ($i = 0; $i < 10; $i++) {
 
-            $user = User::create($data);
-            $user->assignRole('user');
-        }
+        //     $data = [
+        //         'name' => $faker->name(),
+        //         'email' => $faker->email(),
+        //         'password' => Hash::make('12345678'),
+        //     ];
+
+        //     $user = User::create($data);
+        //     $user->assignRole('user');
+        // }
+
+        // $user = User::doesntHave('roles')->get();
+        // foreach ($user as $u) {
+        //     $u->assignRole('user');
+        // }
     }
 }

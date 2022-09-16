@@ -43,14 +43,16 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table table-responsive">
+                        <table class="table table-borderless table-responsive">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Project Name</th>
                                     <th>Task</th>
                                     <th>Progress</th>
+                                    @role('superadmin|admin')
                                     <th>Action</th>
+                                    @endrole
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,10 +70,12 @@
                                                     aria-valuemax="100">{{ $project->progress }}%</div>
                                             </div>
                                         </td>
+                                        @role('superadmin|admin')
                                         <td>
                                             <x-sm_button route="{{ route('project.show', $project) }}" color="primary"
                                                 icon="eye" />
                                         </td>
+                                        @endrole
                                     </tr>
                                 @endforeach
                             </tbody>

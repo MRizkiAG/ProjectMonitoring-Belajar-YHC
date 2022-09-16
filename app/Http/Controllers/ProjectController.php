@@ -30,6 +30,7 @@ class ProjectController extends Controller
             // 'projects' => Project::with('leader')->withCount('tasks')->get()
             'projects' => $project
         ];
+
         // $projects = Project::all();
 
         // $projects = Project::with('leader')->withCount('tasks')->get();
@@ -95,6 +96,10 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $tasks = $project->tasks;
         // return response()->json($tasks);
+
+        // if (Auth::user()->id != $project->leader_id){
+        //     return back();
+        // }
 
         return view('project.show', $data, compact('project', 'tasks'));
     }

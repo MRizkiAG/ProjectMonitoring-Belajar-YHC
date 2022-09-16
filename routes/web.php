@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,11 +28,6 @@ use Illuminate\Support\Facades\Route;
 // });
 Auth::routes();
 
-Route::middleware('role:superadmin')->group(
-    function () {
-        Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    }
-);
 
 Route::middleware('auth')->group(
     function () {
@@ -41,5 +37,12 @@ Route::middleware('auth')->group(
         Route::get('about', [AboutController::class, 'index'])->name('about');
         Route::get('home', [HomeController::class, 'index'])->name('home');
         Route::resource('project', ProjectController::class);
+        Route::resource('task', TaskController::class);
+
+        Route::middleware('role:superadmin')->group(
+            function () {
+                Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+            }
+        );
     }
 );
