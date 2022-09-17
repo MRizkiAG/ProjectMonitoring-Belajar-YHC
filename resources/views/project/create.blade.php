@@ -47,7 +47,7 @@
                                 @enderror
                             </div>
                             <div class="form-group my-3">
-                                <label for="leader_id">Leader ID</label>
+                                <label for="leader_id">Leader</label>
                                 {{-- <input type="number" name="leader_id" id="leader_id" class="form-control"
                                     placeholder="Masukkan leader id" aria-describedby="helpId"
                                     value="{{ @$project->leader_id ?? old('leader_id') }}"> --}}
