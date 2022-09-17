@@ -27,7 +27,7 @@
                         <p class="fst-italic m-0">Leader : {{ $project->leader->name }}</p>
                         <p class="fst-italic">Owner : {{ $project->owner }}</p>
                         <p class="btn btn-danger position-relative">
-                            <i class="bi bi-clock"></i> Deadline : {{ $project->deadline }}
+                            <i class="bi bi-clock"></i> Deadline : {{ date('d-M-Y', strtotime($project->deadline)) }}
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                                 {{ $project->progress }}%
                             </span>

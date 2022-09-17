@@ -48,9 +48,14 @@
                             </div>
                             <div class="form-group my-3">
                                 <label for="leader_id">Leader ID</label>
-                                <input type="number" name="leader_id" id="leader_id" class="form-control"
+                                {{-- <input type="number" name="leader_id" id="leader_id" class="form-control"
                                     placeholder="Masukkan leader id" aria-describedby="helpId"
-                                    value="{{ @$project->leader_id ?? old('leader_id') }}">
+                                    value="{{ @$project->leader_id ?? old('leader_id') }}"> --}}
+                                <select name="leader_id" id="leader_id" class="form-select">
+                                    @foreach ($leader as $l)
+                                        <option {{ @$project->leader_id==$l->id?'selected':'' }} value="{{ $l->id }}">{{ $l->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group my-3">
                                 <label for="owner">Owner</label>

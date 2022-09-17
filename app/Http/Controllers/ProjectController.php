@@ -55,7 +55,9 @@ class ProjectController extends Controller
 
         $url = route('project.store');
 
-        return view('project.create', $data, compact('url'));
+        $leader = User::all();
+
+        return view('project.create', $data, compact('url', 'leader'));
     }
 
     /**
@@ -117,8 +119,9 @@ class ProjectController extends Controller
         ];
         $project = Project::findOrFail($id);
         $url = route('project.update', $project);
+        $leader = User::all();
 
-        return view('project.create', $data, compact('project', 'url'));
+        return view('project.create', $data, compact('project', 'url', 'leader'));
     }
 
     /**
