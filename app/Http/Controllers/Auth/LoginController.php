@@ -27,6 +27,14 @@ class LoginController extends Controller
      *
      * @var string
      */
+    public function showLoginForm()
+    {
+        $data= [
+            'title' => 'Login'
+        ];
+        return view('auth.login', $data);
+    }
+    
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
